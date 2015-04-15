@@ -95,14 +95,16 @@ public class Parser {
 			
 			for(int l = 0; l < functions.get(i).basicBlocks.size(); l++) {
 				for(int m = 0; m < functions.get(i).basicBlocks.get(l).successors.size(); m++) {
-					System.out.println("BasicBlock" + String.valueOf(l) + " -> " + "BasicBlock" + String.valueOf(functions.get(i).basicBlocks.indexOf(functions.get(i).basicBlocks.get(l).successors.get(m))));
+					System.out.println("BasicBlock" + String.valueOf(l) + " -> " + "BasicBlock" + String.valueOf(
+					    functions.get(i).basicBlocks.indexOf(functions.get(i).basicBlocks.get(l).successors.get(m))));
 				}
 			}
 		}		
 	}
 	
 	private boolean varCheckLocal(String name) {
-		return (currentFunction().symbolTable.get(name) != null && !compareName(currentFunction().symbolTable.get(name), "array")); 
+		return (currentFunction().symbolTable.get(name) != null && 
+		    !compareName(currentFunction().symbolTable.get(name), "array")); 
 	}
 	
 	private boolean varCheckGlobal(String name) {
@@ -114,15 +116,18 @@ public class Parser {
 	}
 	
 	private boolean arrayCheckLocal(String name) {
-		return (currentFunction().symbolTable.get(name) != null && currentFunction().symbolTable.get(name).name.compareTo("array") == 0);
+		return (currentFunction().symbolTable.get(name) != null && 
+		    currentFunction().symbolTable.get(name).name.compareTo("array") == 0);
 	}
 	
 	private boolean arrayCheckGlobal(String name) {
-			return (globalSymbolTable.get(name) != null && globalSymbolTable.get(name).name.compareTo("array") == 0);
+			return (globalSymbolTable.get(name) != null && 
+			    globalSymbolTable.get(name).name.compareTo("array") == 0);
 	}
 	
 	private int functionCheck(String name) {
-		if (globalSymbolTable.get(name) != null && globalSymbolTable.get(name).name.compareTo("function") == 0) {
+		if (globalSymbolTable.get(name) != null && 
+		    globalSymbolTable.get(name).name.compareTo("function") == 0) {
 			Function temp = (Function) globalSymbolTable.get(name);
 			return temp.paramsNum;
 		} else if(name.compareTo("InputNum") == 0 || name.compareTo("OutputNewLine") == 0) {
@@ -389,7 +394,8 @@ public class Parser {
 			
 			temp1 = forwardReferring(temp1);
 		}
-		if(peek(Token.Type.EQ) || peek(Token.Type.NEQ) || peek(Token.Type.LT) || peek(Token.Type.LE) || peek(Token.Type.GT) || peek(Token.Type.GE)) {
+		if(peek(Token.Type.EQ) || peek(Token.Type.NEQ) || peek(Token.Type.LT) || 
+		   peek(Token.Type.LE) || peek(Token.Type.GT) || peek(Token.Type.GE)) {
 			next();
 			Token tempToken = previousToken;
 			
@@ -494,7 +500,8 @@ public class Parser {
 				currentFunction().currentBasicBlock().addInstruction(move);
 			} else {
 				currentFunction().symbolTable.put(var.varName, forwardReferring(popInstructionFromStack()));
-				currentFunction().currentBasicBlock().stateVector.updateLocalVar(var.varName, currentFunction().symbolTable.get(var.varName));
+				currentFunction().currentBasicBlock().stateVector.updateLocalVar(
+				    var.varName, currentFunction().symbolTable.get(var.varName));
 			}
 		} else {
 			store.op1 = forwardReferring(popInstructionFromStack());
@@ -611,7 +618,8 @@ public class Parser {
 	private void storeGlobalVars() {
 		for(int i=0; i<globalSymbolTable.symbolList().length; i++) {
 			if (((Instruction) globalSymbolTable.symbolList()[i]).name.equals("var")) {
-				Store store = new Store(currentFunction().symbolTable.get(((Var) globalSymbolTable.symbolList()[i]).varName), (Instruction) globalSymbolTable.symbolList()[i]);
+				Store store = new Store(currentFunction().symbolTable.get(((Var) globalSymbolTable.symbolList()[i]).varName), 
+				    (Instruction) globalSymbolTable.symbolList()[i]);
 				currentFunction().currentBasicBlock().addInstruction(store);
 			}
 		}
@@ -626,7 +634,8 @@ public class Parser {
 					
 				currentFunction().symbolTable.put(((Var) globalSymbolTable.symbolList()[i]).varName, load);
 					
-				currentFunction().currentBasicBlock().stateVector.updateLocalVar(((Var) globalSymbolTable.symbolList()[i]).varName, load);
+				currentFunction().currentBasicBlock().stateVector.updateLocalVar(
+				    ((Var) globalSymbolTable.symbolList()[i]).varName, load);
 			}
 		}
 	}
@@ -761,7 +770,8 @@ public class Parser {
 			
 			if(loopHeader.predecessors.get(1).stateVector.localVars.get(i).instruction.name.compareTo("phi") != 0) {
 				markFiLiveness(loopHeader.predecessors.get(1).stateVector.localVars.get(i).instruction);
-				fiList.get(i).fiPair.add(1, new Phi.FiPair(loopHeader.predecessors.get(1), loopHeader.predecessors.get(1).stateVector.localVars.get(i).instruction));
+				fiList.get(i).fiPair.add(1, new Phi.FiPair(loopHeader.predecessors.get(1), 
+				    loopHeader.predecessors.get(1).stateVector.localVars.get(i).instruction));
 				fiList.get(i).fiPair.remove(2);
 			} else {
 				//check for unnecessary fis
@@ -771,7 +781,8 @@ public class Parser {
 					loopHeader.stateVector.localVars.get(i).instruction = fiList.get(i).fiPair.get(0).instruction;
 				} else {
 					markFiLiveness(loopHeader.predecessors.get(1).stateVector.localVars.get(i).instruction);
-					fiList.get(i).fiPair.add(1, new Phi.FiPair(loopHeader.predecessors.get(1), loopHeader.predecessors.get(1).stateVector.localVars.get(i).instruction));
+					fiList.get(i).fiPair.add(1, new Phi.FiPair(loopHeader.predecessors.get(1), 
+					    loopHeader.predecessors.get(1).stateVector.localVars.get(i).instruction));
 					fiList.get(i).fiPair.remove(2);
 				}
 			}

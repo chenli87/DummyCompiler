@@ -20,14 +20,14 @@ public abstract class Instruction { //abstract class
 	
 	public static boolean isUnaryInstruction(Instruction instruction) {
 		return (instruction.name.compareTo("load")==0 || instruction.name.compareTo("neg")==0 || 
-				instruction.name.compareTo("write")==0 || instruction.name.compareTo("inputParam")==0 || 
-				instruction.name.compareTo("return")==0);
+				    instruction.name.compareTo("write")==0 || instruction.name.compareTo("inputParam")==0 || 
+				    instruction.name.compareTo("return")==0);
 	}
 	
 	public static boolean isConditionalJump(Instruction instruction) {
 		return (instruction.name.compareTo("bne")==0 || instruction.name.compareTo("beq")==0 || 
-				instruction.name.compareTo("ble")==0 || instruction.name.compareTo("blt")==0 || 
-				instruction.name.compareTo("bge")==0 || instruction.name.compareTo("bgt")==0);
+				    instruction.name.compareTo("ble")==0 || instruction.name.compareTo("blt")==0 || 
+				    instruction.name.compareTo("bge")==0 || instruction.name.compareTo("bgt")==0);
 	}
 	
 	public void replaceFi(Parser.InstructionPair fi) {
@@ -36,9 +36,9 @@ public abstract class Instruction { //abstract class
 	
 	public static boolean isBinaryInstruction(Instruction instruction) {
 		return (instruction.name.compareTo("add")==0 || instruction.name.compareTo("sub")==0 || 
-				instruction.name.compareTo("mul")==0 || instruction.name.compareTo("div")==0 || 
-				instruction.name.compareTo("cmp")==0 || instruction.name.compareTo("adda")==0 || 
-				instruction.name.compareTo("store")==0 || instruction.name.compareTo("move")==0);
+				    instruction.name.compareTo("mul")==0 || instruction.name.compareTo("div")==0 || 
+				    instruction.name.compareTo("cmp")==0 || instruction.name.compareTo("adda")==0 || 
+				    instruction.name.compareTo("store")==0 || instruction.name.compareTo("move")==0);
 	}
 	
 	public static class BinaryInstruction extends Instruction {
@@ -67,14 +67,16 @@ public abstract class Instruction { //abstract class
 			
 			result = result + String.valueOf(instruction_id) + ":" + name + " ";
 			
-			if(op1.name.equals("constant") || op1.name.equals("register") || op1.name.equals("memory") || op1.name.equals("var")) {
+			if(op1.name.equals("constant") || op1.name.equals("register") || 
+			   op1.name.equals("memory") || op1.name.equals("var")) {
 				result = result.concat(op1.toString() + " ,");
 			} else {
 				result =result.concat(String.valueOf(op1.instruction_id) + " ,");
 			}
 			
 
-			if(op2.name.equals("constant") || op2.name.equals("register") || op2.name.equals("memory") || op2.name.equals("var")) {
+			if(op2.name.equals("constant") || op2.name.equals("register") || 
+			   op2.name.equals("memory") || op2.name.equals("var")) {
 				result =result.concat(op2.toString());
 			} else {
 				result =result.concat(String.valueOf(op2.instruction_id));
@@ -105,7 +107,8 @@ public abstract class Instruction { //abstract class
 				result = result + "r" + regID + " ";
 			}
 			
-			if(op.name.compareTo("constant") != 0 && !op.name.equals("memory") && !op.name.equals("var") && !op.name.equals("register"))  {
+			if(op.name.compareTo("constant") != 0 && !op.name.equals("memory") && 
+			   !op.name.equals("var") && !op.name.equals("register"))  {
 				result = result + instruction_id + ":" + name + " " + String.valueOf(op.instruction_id);
 			} else {
 				result = result + instruction_id + ":" + name + " " + op.toString();

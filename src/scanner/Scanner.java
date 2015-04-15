@@ -21,7 +21,8 @@ public class Scanner {
 	}
 	
 	private void skipWhiteSpace() throws IOException {
-		while(inputSym == ' ' || inputSym == 0x09 || inputSym == 0x0c || inputSym == 0x0a || inputSym == 0x0d) {
+		while(inputSym == ' ' || inputSym == 0x09 || inputSym == 0x0c || 
+		      inputSym == 0x0a || inputSym == 0x0d) {
 			if(inputSym == 0x0a)
 				lineNumber++;
 			this.next();
@@ -93,7 +94,10 @@ public class Scanner {
 				case '8':
 				case '9': num = Character.toString(inputSym);
 						  this.next();
-						  while(inputSym == '0' || inputSym == '1' || inputSym == '2' || inputSym == '3' || inputSym == '4' || inputSym == '5' || inputSym == '6' || inputSym == '7' || inputSym == '8' || inputSym == '9') {
+						  while(inputSym == '0' || inputSym == '1' || inputSym == '2' || 
+						        inputSym == '3' || inputSym == '4' || inputSym == '5' || 
+						        inputSym == '6' || inputSym == '7' || inputSym == '8' || 
+						        inputSym == '9') {
 							  num = num.concat(Character.toString(inputSym));
 							  this.next();
 						  }
@@ -126,7 +130,15 @@ public class Scanner {
 				case 'y':
 				case 'z': id = Character.toString(inputSym);
 						  this.next();
-						  while(inputSym == '0' || inputSym == '1' || inputSym == '2' || inputSym == '3' || inputSym == '4' || inputSym == '5' || inputSym == '6' || inputSym == '7' || inputSym == '8' || inputSym == '9' || inputSym == 'a' || inputSym == 'b' || inputSym == 'c' || inputSym == 'd' || inputSym == 'e' || inputSym == 'f' || inputSym == 'g' || inputSym == 'h' || inputSym == 'i' || inputSym == 'j' || inputSym == 'k' || inputSym == 'l' || inputSym == 'm' || inputSym == 'n' || inputSym == 'o' || inputSym == 'p' || inputSym == 'q' || inputSym == 'r' || inputSym == 's' || inputSym == 't' || inputSym == 'u' || inputSym == 'v' || inputSym == 'w' || inputSym == 'x' || inputSym == 'y' || inputSym == 'z' ) {
+						  while(inputSym == '0' || inputSym == '1' || inputSym == '2' || inputSym == '3' || 
+						        inputSym == '4' || inputSym == '5' || inputSym == '6' || inputSym == '7' || 
+						        inputSym == '8' || inputSym == '9' || inputSym == 'a' || inputSym == 'b' || 
+						        inputSym == 'c' || inputSym == 'd' || inputSym == 'e' || inputSym == 'f' || 
+						        inputSym == 'g' || inputSym == 'h' || inputSym == 'i' || inputSym == 'j' || 
+						        inputSym == 'k' || inputSym == 'l' || inputSym == 'm' || inputSym == 'n' || 
+						        inputSym == 'o' || inputSym == 'p' || inputSym == 'q' || inputSym == 'r' || 
+						        inputSym == 's' || inputSym == 't' || inputSym == 'u' || inputSym == 'v' || 
+						        inputSym == 'w' || inputSym == 'x' || inputSym == 'y' || inputSym == 'z' ) {
 							  id = id.concat(Character.toString(inputSym));
 							  this.next();
 						  }
@@ -138,7 +150,8 @@ public class Scanner {
 						  break;
 				case 'I': id = Character.toString(inputSym);
 				  		  this.next();
-		  		  		  while(inputSym == 'n' || inputSym == 'p' || inputSym == 'u' || inputSym == 't' || inputSym == 'N' || inputSym == 'm') {
+		  		  		  while(inputSym == 'n' || inputSym == 'p' || inputSym == 'u' || inputSym == 't' || 
+		  		  		        inputSym == 'N' || inputSym == 'm') {
 				  			  id = id.concat(Character.toString(inputSym));
 				  			  this.next();
 				  		  }
@@ -150,7 +163,8 @@ public class Scanner {
 				  		  break;
 				case 'O': id = Character.toString(inputSym);
 		  		  		  this.next();
-		  		  		  while(inputSym == 'u' || inputSym == 't' || inputSym == 'p' || inputSym == 'N' || inputSym == 'e' || inputSym == 'w' || inputSym == 'L' || inputSym == 'i' || inputSym == 'n' || inputSym == 'm') {
+		  		  		  while(inputSym == 'u' || inputSym == 't' || inputSym == 'p' || inputSym == 'N' || inputSym == 'e' || 
+		  		  		        inputSym == 'w' || inputSym == 'L' || inputSym == 'i' || inputSym == 'n' || inputSym == 'm') {
 		  		  			  id = id.concat(Character.toString(inputSym));
 		  		  			  this.next();
 		  		  		  }

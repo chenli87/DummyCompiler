@@ -47,7 +47,8 @@ public class Function extends Instruction {
 	
 	public void updateSymbolTable() {
 		for(int i=0; i<currentBasicBlock().stateVector.localVars.size(); i++) {
-			symbolTable.put(currentBasicBlock().stateVector.localVars.get(i).var, currentBasicBlock().stateVector.localVars.get(i).instruction);
+			symbolTable.put(currentBasicBlock().stateVector.localVars.get(i).var, 
+			    currentBasicBlock().stateVector.localVars.get(i).instruction);
 		}
 	}
 	

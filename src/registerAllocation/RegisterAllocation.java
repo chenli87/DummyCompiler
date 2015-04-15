@@ -151,7 +151,8 @@ public class RegisterAllocation {
 												
 						function.basicBlocks.get(i).liveness.remove(temp);
 						
-						if(temp.op.name.compareTo("constant") != 0 && temp.op.name.compareTo("array") != 0 && !temp.op.name.equals("var")) {
+						if(temp.op.name.compareTo("constant") != 0 && temp.op.name.compareTo("array") != 0 && 
+						    !temp.op.name.equals("var")) {
 							
 							updateInterferenceGraph(function.basicBlocks.get(i).liveness, temp.op);
 							
@@ -164,14 +165,16 @@ public class RegisterAllocation {
 					
 						function.basicBlocks.get(i).liveness.remove(temp);
 						
-						if(temp.op1.name.compareTo("constant") != 0 && temp.op1.name.compareTo("array") != 0 && !temp.op1.name.equals("var")) {							
+						if(temp.op1.name.compareTo("constant") != 0 && temp.op1.name.compareTo("array") != 0 && 
+						    !temp.op1.name.equals("var")) {							
 							updateInterferenceGraph(function.basicBlocks.get(i).liveness, temp.op1);
 							
 							if(!function.basicBlocks.get(i).liveness.contains(temp.op1))
 								function.basicBlocks.get(i).liveness.add(temp.op1);
 						}
 						
-						if(temp.op2.name.compareTo("constant") != 0 && temp.op2.name.compareTo("array") != 0 && !temp.op2.name.equals("var")) {							
+						if(temp.op2.name.compareTo("constant") != 0 && temp.op2.name.compareTo("array") != 0 && 
+						    !temp.op2.name.equals("var")) {							
 							updateInterferenceGraph(function.basicBlocks.get(i).liveness, temp.op2);
 							if(!function.basicBlocks.get(i).liveness.contains(temp.op2))
 								function.basicBlocks.get(i).liveness.add(temp.op2);
@@ -183,7 +186,8 @@ public class RegisterAllocation {
 						function.basicBlocks.get(i).liveness.remove(temp);
 						
 						for(Instruction instruction: temp.formalParams) {
-							if(!instruction.name.equals("var") && !instruction.name.equals("constant") && !instruction.name.equals("array")) {
+							if(!instruction.name.equals("var") && !instruction.name.equals("constant") && 
+							    !instruction.name.equals("array")) {
 								updateInterferenceGraph(function.basicBlocks.get(i).liveness, instruction);
 								if(!function.basicBlocks.get(i).liveness.contains(instruction))
 									function.basicBlocks.get(i).liveness.add(instruction);
@@ -198,7 +202,8 @@ public class RegisterAllocation {
 						
 						int k = 0;
 						for(FiPair pair: temp.fiPair) {	
-							if(pair.instruction.name.compareTo("constant") != 0 && pair.instruction.name.compareTo("array") != 0 && !pair.instruction.name.equals("var")) {							
+							if(pair.instruction.name.compareTo("constant") != 0 && pair.instruction.name.compareTo("array") != 0 && 
+							    !pair.instruction.name.equals("var")) {							
 								updateInterferenceGraph(function.basicBlocks.get(i).predecessors.get(k).liveness, pair.instruction);
 								
 								if(!function.basicBlocks.get(i).predecessors.get(k).liveness.contains(pair.instruction)) {
@@ -522,7 +527,8 @@ public class RegisterAllocation {
 	
 	//assign Phi to the same register
 	private void assignPhiReg(Phi fi) {
-		if(!isConflict(fi, fi.getArgument(0)) && !isConflict(fi, fi.getArgument(1)) && !isConflict(fi.getArgument(0), fi.getArgument(1))) {
+		if(!isConflict(fi, fi.getArgument(0)) && !isConflict(fi, fi.getArgument(1)) && 
+		    !isConflict(fi.getArgument(0), fi.getArgument(1))) {
 			int reg = returnCommonRegFrom3(lookupRegs(fi), lookupRegs(fi.getArgument(0)), lookupRegs(fi.getArgument(1)));
 			//if they have common reg, assgn them with this reg
 			if(reg != 0) {
@@ -609,7 +615,8 @@ public class RegisterAllocation {
 				}
 				
 				if(fi.regID != 0) {
-					if(!isConflict(fi, fi.getArgument(1)) && fi.getArgument(0).regID == 0 && lookupRegs(fi.getArgument(1)).contains(fi.regID)) {
+					if(!isConflict(fi, fi.getArgument(1)) && fi.getArgument(0).regID == 0 && 
+					    lookupRegs(fi.getArgument(1)).contains(fi.regID)) {
 						fi.getArgument(1).regID = fi.regID;
 						removeConflictReg(fi.getArgument(1), fi.regID);
 					} else {
@@ -651,7 +658,8 @@ public class RegisterAllocation {
 				}
 				
 				if(fi.regID != 0) {
-					if(!isConflict(fi, fi.getArgument(0)) && fi.getArgument(1).regID == 0 && lookupRegs(fi.getArgument(0)).contains(fi.regID)) {
+					if(!isConflict(fi, fi.getArgument(0)) && fi.getArgument(1).regID == 0 && 
+					    lookupRegs(fi.getArgument(0)).contains(fi.regID)) {
 						fi.getArgument(0).regID = fi.regID;
 						removeConflictReg(fi.getArgument(0), fi.regID);
 					} else {
@@ -778,7 +786,8 @@ public class RegisterAllocation {
 			
 			for(int l = 0; l < functions.get(i).basicBlocks.size(); l++) {
 				for(int m = 0; m < functions.get(i).basicBlocks.get(l).successors.size(); m++) {
-					System.out.println("BasicBlock" + functions.get(i).basicBlocks.get(l).blockID + " -> " + "BasicBlock" + functions.get(i).basicBlocks.get(l).successors.get(m).blockID);
+					System.out.println("BasicBlock" + functions.get(i).basicBlocks.get(l).blockID + " -> " + 
+					    "BasicBlock" + functions.get(i).basicBlocks.get(l).successors.get(m).blockID);
 				}
 			}
 		}
